@@ -1,3 +1,4 @@
+const serverless = require('serverless-http');
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors');
@@ -6,7 +7,13 @@ const OpenAI = require('openai');
 const app = express()
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-app.use(cors());
+
+// CORS 이슈 해결
+let corsOptions = {
+    origin: 'https://chatdoge-173.pages.dev',
+    credentials: true
+}
+app.use(cors(corsOptions));
 
 const openai = new OpenAI({
     apiKey: 'API KEY', // This is the default and can be omitted
@@ -50,4 +57,5 @@ app.post('/tellFortune', async (req, res) => {
     res.json({"assistant": fortune})
 });
 
-app.listen(3000)
+module.exports.handler = serverless(app);
+// app.listen(3000)
