@@ -81,7 +81,7 @@
     <div class="chat-container">
         <div class="chat-box">
             <div class="chat-message">
-                <p class="assistant">운세에 대해서 물어봐 주세요!</p>
+                <p class="assistant">도로명에 대해 궁금한점 물어보세요!</p>
             </div>
         </div>
         <div id="loader" class="loader" style="display: none;">
@@ -116,7 +116,7 @@
 
             // https://gq3oitz7lnikeu32lnqnhi3fqy0jrpnq.lambda-url.ap-northeast-2.on.aws/tellFortune
             // https://localhost:3000/tellFortune
-            const response = await fetch('http://localhost:3000/tellFortune', {
+            const response = await fetch('http://localhost:3000/ask', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
