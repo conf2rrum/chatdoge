@@ -88,9 +88,9 @@
             <i class="fa fa-spinner fa-spin"></i>
         </div>
         <div class="chat-input">
-            <input type="text" placeholder="Type your message here...">
+            <input type="text" placeholder="메세지를 입력하세요.">
             <button id="btn" onclick="spinner()">Send</button>
-        </div>        
+        </div>
     </div>
     <script>
         const chatBox = document.querySelector('.chat-box');
@@ -109,9 +109,12 @@
             chatMessage.innerHTML = `<p>${chatInput.value}</p>`;
             chatBox.appendChild(chatMessage);
 
+            // 스크롤을 최하단으로 이동시킵니다.
+            chatBox.scrollTop = chatBox.scrollHeight;
+
             // userMessage 메세지 추가
             userMessage = chatInput.value;
-            
+
             chatInput.value = '';
 
             // https://gq3oitz7lnikeu32lnqnhi3fqy0jrpnq.lambda-url.ap-northeast-2.on.aws/tellFortune
@@ -138,10 +141,13 @@
             astrologerMessage.classList.add('chat-message');
             astrologerMessage.innerHTML = `<p class='assistant'>${data.assistant}</p>`;
             chatBox.appendChild(astrologerMessage);
+
+            // 스크롤을 최하단으로 이동시킵니다.
+            chatBox.scrollTop = chatBox.scrollHeight;
         };
 
         document.querySelector('.chat-input button').addEventListener('click', sendMessage);
-        document.querySelector('.chat-input input').addEventListener('keyup', function(event) {
+        document.querySelector('.chat-input input').addEventListener('keyup', function (event) {
             if (event.key === 'Enter') {
                 event.preventDefault();
                 sendMessage();
