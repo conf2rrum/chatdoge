@@ -7,20 +7,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: 'Noto Sans KR', sans-serif;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 400;
         }
 
         .chat-container {
-            max-width: 500px;
+            max-width: 600px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 30px;
         }
 
         .chat-box {
@@ -29,7 +30,7 @@
             border-radius: 10px;
             margin-bottom: 20px;
             overflow-y: scroll;
-            height: 300px;
+            height: 800px;
         }
 
         .chat-message {
@@ -52,22 +53,27 @@
         .chat-input input {
             flex: 1;
             padding: 10px;
-            border: none;
+            border: 1px solid black;
             border-radius: 5px;
             margin-right: 10px;
         }
 
         .chat-input button {
-            background-color: #4CAF50;
+            width: 38px;
+            background-color: #abafabe6;
             color: #fff;
             border: none;
-            padding: 10px;
+            padding: 5px;
             border-radius: 5px;
             cursor: pointer;
         }
 
+        .chat-input button i {
+            font-size: 18px; /* 원하는 크기로 조절 */
+        }       
+
         .chat-input button:hover {
-            background-color: #3e8e41;
+            background-color: #747474;
         }
 
         .assistant {
@@ -78,13 +84,7 @@
             font-size: 25px;
             text-align: center;
         }
-
-        .noto-sans-kr-retular {
-            font-family: "Noto Sans KR", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: 400;
-            font-style: normal;
-        }
+        
     </style>
 </head>
 
@@ -100,13 +100,14 @@
         </div>
         <div class="chat-input">
             <input type="text" placeholder="메세지를 입력하세요.">
-            <button id="btn" onclick="spinner()">Send</button>
+            <button id="btn" onclick="spinner()">
+                <i class="fas fa-arrow-up"></i>
+            </button>
         </div>
     </div>
     <script>
         const chatBox = document.querySelector('.chat-box');
         let userMessages = [];
-        let assistantMessages = [];
         let threadId = '';
 
         function spinner() {
@@ -144,14 +145,10 @@
             const data = await response.json();
             document.getElementById('loader').style.display = "none";
 
-            //assistantMessage 메세지 추가
-            assistantMessages.push(data.assistant);
-            threadId = data.threadId;
-
-            const astrologerMessage = document.createElement('div');
-            astrologerMessage.classList.add('chat-message');
-            astrologerMessage.innerHTML = `<p class='assistant'>${data.assistant}</p>`;
-            chatBox.appendChild(astrologerMessage);
+            const assistMessage = document.createElement('div');
+            assistMessage.classList.add('chat-message');
+            assistMessage.innerHTML = `<p class='assistant'>${data.assistant}</p>`;
+            chatBox.appendChild(assistMessage);
 
             // 스크롤을 최하단으로 이동시킵니다.
             chatBox.scrollTop = chatBox.scrollHeight;
