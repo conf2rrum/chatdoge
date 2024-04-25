@@ -95,8 +95,12 @@ app.post('/ask', async (req, res) => {
 
     const threadMessages = await openai.beta.threads.messages.list(threadId);
     assistantLastMsg = threadMessages.data[0].content[0].text.value
+    const pattern = /【\d+†source】/g;  // 'g' 플래그는 전역 검색을 의미합니다.
 
-    res.json({ "assistant": assistantLastMsg, "threadId": threadId })
+    // replace() 메소드로 매칭되는 모든 부분을 빈 문자열로 치환
+    const cleanedText = assistantLastMsg.replace(pattern, '');
+
+    res.json({ "assistant": cleanedText, "threadId": threadId })
 });
 
 // module.exports.handler = serverless(app);
