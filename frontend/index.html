@@ -166,8 +166,8 @@
             const userMessage = chatInput.value;
             chatInput.value = '';
 
-            // https://gq3oitz7lnikeu32lnqnhi3fqy0jrpnq.lambda-url.ap-northeast-2.on.aws/tellFortune
-            // https://localhost:3000/tellFortune
+            // https://txwagemkhjwnc3lyksk7jeo3wm0grkfl.lambda-url.ap-northeast-2.on.aws/ask
+            // https://localhost:3000/ask
             const response = await fetch('http://localhost:3000/ask', {
                 method: 'POST',
                 headers: {
