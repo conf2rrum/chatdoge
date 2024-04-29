@@ -3,17 +3,17 @@ const OpenAI = require('openai');
 const express = require('express');
 // const bodyParser = require('body-parser');
 const cors = require('cors');
-// const serverless = require('serverless-http');
+const serverless = require('serverless-http');
 const app = express()
 const fs = require('fs');
 const { toFile } = require('openai');
 const path = require('path');
 
 // CORS 이슈 해결
-// let corsOptions = {
-//     origin: 'https://chatgenie.pages.dev',
-//     credentials: true
-// }
+let corsOptions = {
+    origin: 'https://chatgenie.pages.dev',
+    credentials: true
+}
 
 app.use(cors());
 
