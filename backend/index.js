@@ -64,16 +64,19 @@ async function createAssistant() {
 // POST method route
 app.post('/ask', async (req, res) => {
     let { userMessage, threadId } = req.body
+    console.log(userMessage)
     const assistantId = "asst_QSnIoI9IDSs9v2Zzv6zfTD1n"
 
     if (threadId == '') {
         const emptyThread = await openai.beta.threads.create();
         threadId = emptyThread.id;
+        console.log(threadId)
         await openai.beta.threads.messages.create(
             threadId,
             { role: "user", content: userMessage }
         );
     }
+    console.log(threadId)
     await openai.beta.threads.messages.create(
         threadId,
         { role: "user", content: userMessage }

@@ -140,8 +140,6 @@
         let userMessages = [];
         let threadId = '';
 
-
-
         const sendMessage = async () => {
             const chatInput = document.querySelector('.chat-input input');
             const userMessageDiv = document.createElement('div');
@@ -171,6 +169,8 @@
             });
 
             const data = await response.json();
+
+            threadId = data.threadId;
 
             const assistMessageDiv = document.createElement('div');
             assistMessageDiv.classList.add('chat-message', 'assistant');
